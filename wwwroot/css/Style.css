@@ -1,0 +1,60 @@
+﻿
+/* Color de fondo de la pagina */
+body {
+    background-color: #dca350;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+#carouselExampleCaptions {
+    margin: 0 auto; /* Para centrar horizontalmente */
+    width: 80%; /* Cambiar el ancho del carrusel según sea necesario */
+}
+/* Cambiar dimensiones de las imágenes */
+.carousel-item img {
+    max-width: 100%; /* Hacer que las imágenes se ajusten al tamaño del carrusel */
+    height: auto; /* Mantener la proporción de la imagen */
+}
+
+.ptm {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    background-color: rgb(250, 190, 79);
+    border-radius: 0 0 5px 5px;
+}
+
+.imgcards {
+    border-radius: 5px 5px 0 0;
+}
+
+.caruselimg {
+    width: 900px;
+    height: 500px;
+}
+
+.fixed-button {
+    position: fixed;
+    bottom: 20px; /* Ajusta la distancia desde la parte inferior */
+    right: 20px; /* Ajusta la distancia desde la derecha */
+    padding: 10px 20px;
+    background-color: #ff9d00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    /* Opcional: Estilos adicionales según tus necesidades */
+    .fixed-button:hover {
+        background-color: #ff7700;
+    }
+
+
+/* pago */
+
+.colorCombos{
+    color: black;
+}

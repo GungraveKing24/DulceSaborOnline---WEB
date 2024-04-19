@@ -1,7 +1,16 @@
+using DulceSaborOnline___WEB.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<DScontext>(options =>
+options.UseSqlServer(
+    builder.Configuration.GetConnectionString("DulceSaborDB")
+    )
+);
 
 var app = builder.Build();
 

@@ -1,0 +1,55 @@
+.icon-container {
+    display: flex; /* Utiliza un flex container para alinear los íconos */
+}
+
+.icon-container i {
+    margin-right: 50px; /* Espacio entre cada ícono */
+    margin-left: 20px;
+    font-size: 2rem; 
+}
+.custom-lg {
+    font-size: 2rem; /* Cambia el tamaño del ícono a 2 veces el tamaño base */
+}
+
+ /* Estilo para el contenedor del historial */
+ .order-history-container {
+    margin-top: 50px;
+}
+/* Estilo para cada pedido */
+.order-card {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+/* Estilo para la imagen */
+.order-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+    flex-shrink: 0; /* Evita que la imagen se reduzca */
+}
+/* Estilo para el texto */
+.order-details {
+    font-size: 1.2rem;
+    color: black;
+}
+/* Estilo para ajustar la alineación del texto en dispositivos pequeños */
+@media (max-width: 576px) {
+    .order-card {
+        flex-direction: column; /* Cambia la dirección de la columna en dispositivos pequeños */
+        align-items: flex-start; /* Alinea el contenido a la izquierda en dispositivos pequeños */
+    }
+    .order-image {
+        margin-bottom: 10px; /* Espacio entre la imagen y el texto en dispositivos pequeños */
+    }
+}
+
+/* Cambiar el color de los enlaces */
+a {
+    color: black; /* Cambia "black" por el color que desees */
+}
+
+/* Cambiar el color de los enlaces cuando se encuentren en estado "hover" (cuando el cursor pasa sobre ellos) */
+a:hover {
+    color: black; /* Cambia "red" por el color que desees */
+}
