@@ -6,7 +6,7 @@ namespace DulceSaborOnline___WEB.Models
     public class Usuarios
     {
         [Key]
-        public int id { get; set; }
+        public int id_usuario { get; set; }
         public string nombre { get; set; }
         public string apellido { get; set; }
         public string telefono { get; set; }    
