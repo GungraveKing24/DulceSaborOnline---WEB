@@ -17,24 +17,33 @@
         </div>
         <div class="card-body">
             <div class="tab-content">
+                
                 <!-- Inicio de sesión -->
                 <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
                     <h5 class="card-title">Inicio de Sesión</h5>
                     <br>
-                    <form>
+                    <form method="post" action="@Url.Action("Login", "Autenticacion")">
+                        @Html.AntiForgeryToken()
                         <!-- Campos de inicio de sesión -->
-                        <label class="card-title" for="">Usuario o Correo</label>
-                        <input class="form-control" type="text">
+                        <label class="card-title" for="correo">Usuario o Correo</label>
+                        <input name="correo" id="correo" class="form-control" type="text">
 
                         <br>
-                        <label for="inputPassword5" class="form-label">Password</label>
-                        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+                        <label for="clave" class="form-label">Password</label>
+                        <input name="contrasena" id="contrasena" type="password" class="form-control" aria-describedby="passwordHelpBlock">
 
                         <br>
-                        <button class="btn btn-dark justify-content-end my-5">Iniciar Sesion</button>
-
+                        <button type="submit" class="btn btn-dark justify-content-end my-5">Iniciar Sesión</button>
                     </form>
+                    <!-- Mensaje de error -->
+                    @if (ViewData["Error"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewData["Error"]
+                        </div>
+                    }
                 </div>
+
                 <!-- Registro -->
                 <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
                     <h5 class="card-title">Registro</h5>
