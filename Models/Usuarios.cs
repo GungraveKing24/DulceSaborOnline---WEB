@@ -13,6 +13,6 @@ namespace DulceSaborOnline___WEB.Models
         public string direccion { get; set; }
         public string nombre_usuario { get; set; }
         public string contrasena { get; set; }
-        public string foto { get; set; }
+        public string? foto { get; set; }
     }
 }

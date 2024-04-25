@@ -20,7 +20,7 @@
         <nav class="navbar fixed-top" style="background-color: #EEE8AA;">
             <div class="container-fluid">
                 <div class="container d-flex">
-                    <a class="nav-link active mx-3" style="padding-left: 150px;" aria-current="page" href="#">Inicio</a>
+                    <a class="nav-link active mx-3" style="padding-left: 150px;" aria-current="page" asp-area="" asp-controller="Home" asp-action="">Inicio</a>
                     <a class="nav-link mx-3" href="#">Combos</a>
                     <div class="dropdown mx-3">
                         <a class="nav-link dropdown-toggle" style="padding-right:100px;" href="#" role="button" id="comidasDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -101,6 +101,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/app.js" asp-append-version="true"></script>
+    <script src="~/js/foto.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

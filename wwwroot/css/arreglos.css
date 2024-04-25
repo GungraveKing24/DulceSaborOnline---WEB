@@ -53,3 +53,45 @@ a {
 a:hover {
     color: black; /* Cambia "red" por el color que desees */
 }
+
+
+
+
+/*Arreglos fotos*/
+
+.image-preview {
+    width: 110px; /* Tamaño del preview */
+    height: 110px; /* Tamaño del preview */
+    border-radius: 50%; /* Forma de círculo */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que se desborde */
+    margin: 20px auto; /* Centro horizontalmente */
+    position: relative; /* Para posicionar el texto de vista previa */
+}
+
+.image-preview__image {
+    width: 100%; /* Para que la imagen llene completamente el contenedor */
+    height: 100%; /* Para que la imagen llene completamente el contenedor */
+    object-fit: cover; /* La imagen cubrirá el contenedor sin deformarse */
+}
+
+.image-preview__default-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #aaa;
+}
+
+.file-upload-btn {
+    border: 1px solid #ccc;
+    padding: 6px 12px;
+    cursor: pointer;
+}
+
+    .file-upload-btn i {
+        margin-right: 5px;
+    }
+
+.text-center {
+    text-align: center; /* Centro el contenido dentro de la div */
+}

@@ -1,71 +1,35 @@
 ﻿@{
-    ViewData["Title"] = "Control";
+    ViewData["Title"] = "Inicio de Sesión";
 }
 
-<!-- Login -->
-<div class="container my-5">
-    <div class="card text-center container" style="width: 500px; height: 550px;">
+<div class="container my-5 pt-5">
+    <div class="card text-center container" style="width: 500px; height: 100%;">
         <div class="card-header">
-            <ul class="nav nav-tabs card-header-tabs" style="display: flex; padding-left: 100px;">
-                <li class="nav-item">
-                    <a class="nav-link active" id="login-tab" href="#">Iniciar Sesión</a>
-                </li>
-                <li class="nav-item mx-3">
-                    <a class="nav-link active" id="register-tab" href="#">Registrarse</a>
-                </li>
-            </ul>
+            <h5 class="card-title">Inicio de Sesión</h5>
         </div>
         <div class="card-body">
-            <div class="tab-content">
-                
-                <!-- Inicio de sesión -->
-                <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-                    <h5 class="card-title">Inicio de Sesión</h5>
-                    <br>
-                    <form method="post" action="@Url.Action("Login", "Autenticacion")">
-                        @Html.AntiForgeryToken()
-                        <!-- Campos de inicio de sesión -->
-                        <label class="card-title" for="correo">Usuario o Correo</label>
-                        <input name="correo" id="correo" class="form-control" type="text">
+            <form method="post" action="@Url.Action("Login", "Autenticacion")">
+                @Html.AntiForgeryToken()
+                <!-- Contenido del formulario de inicio de sesión -->
 
-                        <br>
-                        <label for="clave" class="form-label">Password</label>
-                        <input name="contrasena" id="contrasena" type="password" class="form-control" aria-describedby="passwordHelpBlock">
+                <label class="card-title" for="correo">Usuario o Correo</label>
+                <input name="correo" id="correo" class="form-control" type="text">
 
-                        <br>
-                        <button type="submit" class="btn btn-dark justify-content-end my-5">Iniciar Sesión</button>
-                    </form>
-                    <!-- Mensaje de error -->
-                    @if (ViewData["Error"] != null)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @ViewData["Error"]
-                        </div>
-                    }
+                <br>
+                <label for="clave" class="form-label">Password</label>
+                <input name="contrasena" id="contrasena" type="password" class="form-control" aria-describedby="passwordHelpBlock">
+
+                <br>
+                <button type="submit" class="btn btn-dark justify-content-end my-5 mx-5">Iniciar Sesión</button>
+                <button class="btn btn-dark justify-content-end my-5 mx-5" asp-action="registro" asp-controller="registro">Registrarse</button>
+            </form>
+            <!-- Mensaje de error -->
+            @if (ViewData["Error"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData["Error"]
                 </div>
-
-                <!-- Registro -->
-                <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-                    <h5 class="card-title">Registro</h5>
-                    <br>
-                    <form>
-                        <label>Ingrese su nombre</label>
-                        <input class="form-control" type="text">
-                        <br>
-                        <label for="inputPassword5" class="form-label">Password</label>
-                        <input type="password" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
-                        <br>
-                        <label>Telefefono</label>
-                        <input class="form-control" type="text">
-                        <br>
-                        <label>Direccion</label>
-                        <input class="form-control" type="text">
-                        <br>
-
-                        <button class="btn btn-dark my-3">Iniciar Sesion</button>
-                    </form>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </div>

@@ -12,7 +12,7 @@ namespace DulceSaborOnline___WEB.Controllers
             _context = context;
         }
 
-        
+
         [HttpPost]
         public ActionResult login(string correo, string contrasena)
         {
@@ -34,5 +34,7 @@ namespace DulceSaborOnline___WEB.Controllers
                 return View("login");
             }
         }
+
+        
     }
 }

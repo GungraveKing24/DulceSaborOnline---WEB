@@ -18,7 +18,7 @@
 
 <!-- Carousel -->
 
-<div id="carouselExampleCaptions" class="carousel slide container my-3 container ">
+<div id="carouselExampleCaptions" class="carousel slide container my-3 container " style="padding-top: 100px;">
     <div class="carousel-inner caruselimg container">
 
         <!-- Primer elemento del carrusel (activo) -->
@@ -72,7 +72,7 @@
                             <div class="card-body ptm">
                                 <h5 class="card-title">@item.nombre</h5>
                                 <p class="card-text">@item.descripcion</p>
-                                <a href="#" class="btn btn-dark">Detalles</a>
+                                <a class="btn btn-dark" asp-action="pago" asp-route-id="@item.id_item_menu">Detalles</a>
                             </div>
                         </div>
                     </div>
