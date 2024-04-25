@@ -39,7 +39,24 @@ namespace DulceSaborOnline___WEB.Controllers
             // Verificar si existe un pedido pendiente para el usuario actual
             var detallepedidoPendiente = _context.pedidos.FirstOrDefault(p => p.id_usuario == idUsuario && p.Estado == "Pendiente");
             var idPedido = ObtenerIdPedidoPendiente(idUsuario);
-            
+
+
+            if (detallepedidoPendiente == null)
+            {
+                // Crear un nuevo pedido pendiente si no existe
+                var nuevoPedido = new Pedidos
+                {
+                    id_usuario = idUsuario,
+                    Estado = "Pendiente",
+                    Total = 0,
+                    fecha_hora = DateTime.Today,
+                    com_prom = 0,
+                    direccion_id = 0
+                };
+
+                _context.pedidos.Add(nuevoPedido);
+                _context.SaveChanges();
+            }
             if (detallepedidoPendiente != null)
             {
                 // Si no hay un pedido pendiente, crear uno nuevo

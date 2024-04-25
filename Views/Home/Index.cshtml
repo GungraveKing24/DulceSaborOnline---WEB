@@ -6,7 +6,7 @@
 
 <!-- Fijar botón -->
 <div class="container d-flex">
-    <a class="fixed-button btn-dark" href="/DulceSabor/pagos" >
+    <a class="fixed-button btn-dark" href="@Url.Action("Index", "Pagos")">
         <img src="/img/boton-de-compra (1).png">
 
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
@@ -17,7 +17,6 @@
 </div>
 
 <!-- Carousel -->
-
 <div id="carouselExampleCaptions" class="carousel slide container my-3 container " style="padding-top: 100px;">
     <div class="carousel-inner caruselimg container">
 
@@ -72,9 +71,9 @@
                             <div class="card-body ptm">
                                 <h5 class="card-title">@item.nombre</h5>
                                 <p class="card-text">@item.descripcion</p>
-                                <p >@item.id_item_menu</p>
+                                <p>@item.id_item_menu</p>
                                 <form asp-controller="Home" asp-action="AgregarElemento" method="post">
-                                    <input type="hidden" name="idItemMenu" value="@item.id_item_menu"/> <!-- Agrega un campo oculto para almacenar el ID del item -->
+                                    <input type="hidden" name="idItemMenu" value="@item.id_item_menu" /> <!-- Agrega un campo oculto para almacenar el ID del item -->
                                     <button type="submit" class="btn btn-dark" id="btnAgregarElemento">Pedir</button>
                                 </form>
                             </div>
