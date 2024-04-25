@@ -29,5 +29,54 @@ namespace DulceSaborOnline___WEB.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult AgregarElemento(int idItemMenu)
+        {
+            // Aquí puedes obtener el ID de usuario desde la cookie o desde el contexto de usuario actual
+            var idUsuario = ObtenerIdUsuarioDesdeCookie(); // Función que debes implementar
+
+            // Verificar si existe un pedido pendiente para el usuario actual
+            var detallepedidoPendiente = _context.pedidos.FirstOrDefault(p => p.id_usuario == idUsuario && p.Estado == "Pendiente");
+            var idPedido = ObtenerIdPedidoPendiente(idUsuario);
+            
+            if (detallepedidoPendiente != null)
+            {
+                // Si no hay un pedido pendiente, crear uno nuevo
+                var detallepedidoPendienteNuevo = new detalles_pedidos
+                {
+                   id_pedido = idPedido,
+                   id_comida = idItemMenu,
+                   Tipo_Plato = "N",
+                   comentario = "Coments"
+                };
+
+                _context.detalles_Pedidos.Add(detallepedidoPendienteNuevo);
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+
+        public int ObtenerIdPedidoPendiente(int idUsuario)
+        {
+            var idPedidoPendiente = _context.pedidos
+                .Where(p => p.id_usuario == idUsuario && p.Estado == "Pendiente")
+                .Select(p => p.Id_Pedido)
+                .FirstOrDefault();
+
+            // Puedes manejar el caso en el que no se encuentre ningún pedido pendiente para el usuario aquí
+            return idPedidoPendiente; // Devolver el ID del pedido pendiente
+        }
+
+        // Función ficticia para obtener el ID de usuario desde la cookie
+        private int ObtenerIdUsuarioDesdeCookie()
+        {
+            // Aquí debes implementar la lógica para obtener el ID de usuario desde la cookie
+            // Por ejemplo:
+            var usuarioCookie = Request.Cookies["UsuarioCookie"];
+            var idUsuario = Convert.ToInt32(usuarioCookie?.Split('|')[0]);
+            return idUsuario;
+        }
     }
 }
