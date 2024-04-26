@@ -1,8 +1,6 @@
 ﻿@*
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
-@{
-}
 
 <div class="container pt-5">
     <div class="container">
@@ -11,26 +9,25 @@
             <!-- Ejemplo de un pedido entregado -->
             <div class="card order-card mt-5">
                 <div class="row g-0">
-                    @{
-                        // Agrupamos los datos por la ID del pedido
-                        var historialAgrupado = ((List<dynamic>)ViewData["HistorialPedidos"]).GroupBy(p => p.IdPedido);
-                    }
-                    @if (historialAgrupado == null)
+                    @foreach (var pedido in Model)
                     {
-                        @foreach (var grupo in historialAgrupado)
-                        {
-                            <div class="historial-item">
-                                <h4>Pedido # @grupo.Key</h4>
-                                <p>Fecha: FechaHora</p>
-                                <p>Nombre(s) de los ítem(s):</p>
-                                <ul>
-                                </ul>
-                            </div>
-                        }
-                    }
-                    else
-                    {
-                        <p>No hay historial</p>
+                        <div class="historial-item">
+                            <h4>Pedido # @pedido.IdPedido</h4>
+                            <p>Fecha: @(pedido.Detalles.Count > 0 ? pedido.Detalles[0].FechaHora.ToString() : "")</p>
+                            <p>Nombre(s) de los ítem(s):</p>
+                            <ul>
+                                @foreach (var detalle in pedido.Detalles)
+                                {
+                                    <li>@detalle.NombreItemMenu</li>
+                                }
+                            </ul>
+
+                            <!-- Botón de reordenar pedido -->
+                            <form asp-controller="Home" asp-action="ReordenarPedido" method="post">
+                                <input type="hidden" name="idPedido" value="@pedido.IdPedido" />
+                                <button type="submit" class="btn btn-primary">Reordenar Pedido</button>
+                            </form>
+                        </div>
                     }
                 </div>
             </div>
