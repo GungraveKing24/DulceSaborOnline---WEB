@@ -3,3 +3,27 @@
 *@
 @{
 }
+
+<div class="container my-5 pt-5">
+    <h1 class="text-center">Combos de Comida</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-5">
+        <!-- Primer combo de comida -->
+        @foreach (var combo in Model)
+        {
+            <div class="col">
+                <div class="card h-100" style="background-color: blanchedalmond;">
+                    <img src="@combo.imagen" class="card-img-top" style="max-height: 200px;" alt="Combo 1">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">@combo.id_combo</h5>
+                        <p class="card-text">@combo.descripcion</p>
+
+                        <form asp-controller="Home" asp-action="ordenarcombo" method="post">
+                            <input type="hidden" name="idcombo" value="@combo.id_combo" />
+                            <button type="submit" class="btn btn-primary">Reordenar Pedido</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

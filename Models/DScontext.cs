@@ -16,5 +16,6 @@ namespace DulceSaborOnline___WEB.Models
         public DbSet<Pagos> pagos { get; set; }
         public DbSet<detalles_pedidos> detalles_Pedidos{ get; set; }
         public DbSet<direcciones> direcciones { get; set; }
+        public DbSet<items_combo> items_combo {  get; set; }
     }
 }

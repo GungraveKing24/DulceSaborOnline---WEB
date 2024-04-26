@@ -14,12 +14,6 @@ namespace DulceSaborOnline___WEB.Controllers
             _context = context;
         }
 
-        public IActionResult combos()
-        {
-            return View("combos");
-        }
-
-
         public IActionResult Index()
         {
             var itemsMenu = _context.items_menu.ToList();
@@ -180,5 +174,91 @@ namespace DulceSaborOnline___WEB.Controllers
 
             return RedirectToAction("Historial");
         }
+
+        public IActionResult Combos()
+        {
+            var combos = (from c in _context.combos
+                          select c).ToList();
+
+            return View("Combos", combos);
+        }
+
+        [HttpPost]
+        public IActionResult ordenarcombo(int idCombo)
+        {
+            // Consulta para obtener los items_menu asociados al combo
+            var itemsEnlazados = (from ic in _context.items_combo
+                                  join im in _context.items_menu on ic.id_item_menu equals im.id_item_menu
+                                  where ic.id_combo == idCombo
+                                  select im).ToList();
+
+            // Verificar si existe un pedido pendiente para el usuario actual
+            var pedidoPendiente = _context.pedidos.FirstOrDefault(p => p.id_usuario == ObtenerIdUsuarioDesdeCookie() && p.Estado == "Pendiente");
+
+            if (pedidoPendiente == null)
+            {
+                // Crear un nuevo pedido pendiente si no existe
+                var nuevoPedido = new Pedidos
+                {
+                    id_usuario = ObtenerIdUsuarioDesdeCookie(),
+                    Estado = "Pendiente",
+                    Total = 0,
+                    fecha_hora = DateTime.Today,
+                    com_prom = 0,
+                    direccion_id = 0
+                };
+                _context.pedidos.Add(nuevoPedido);
+                _context.SaveChanges();
+
+                // Obtener el ID del nuevo pedido pendiente después de guardarlo en la base de datos
+                var idNuevoPedido = nuevoPedido.Id_Pedido;
+
+                // Iterar sobre los items enlazados y añadirlos al pedido pendiente
+                foreach (var item in itemsEnlazados)
+                {
+                    // Crear un nuevo detalle del pedido asociado al pedido pendiente
+                    var nuevoDetallePedido = new detalles_pedidos
+                    {
+                        id_pedido = idNuevoPedido,
+                        id_comida = item.id_item_menu,
+                        Tipo_Plato = "N",
+                        comentario = "Comentario"
+                    };
+
+                    // Añadir el nuevo detalle del pedido a la base de datos
+                    _context.detalles_Pedidos.Add(nuevoDetallePedido);
+                }
+
+                // Guardar los cambios en la base de datos después de agregar todos los detalles del pedido
+                _context.SaveChanges();
+            }
+            else
+            {
+
+                // Obtener el ID del nuevo pedido pendiente después de guardarlo en la base de datos
+                var idNuevoPedido = ObtenerIdPedidoPendiente(ObtenerIdUsuarioDesdeCookie());
+
+                // Iterar sobre los items enlazados y añadirlos al pedido pendiente
+                foreach (var item in itemsEnlazados)
+                {
+                    // Crear un nuevo detalle del pedido asociado al pedido pendiente
+                    var nuevoDetallePedido = new detalles_pedidos
+                    {
+                        id_pedido = idNuevoPedido,
+                        id_comida = item.id_item_menu,
+                        Tipo_Plato = "N",
+                        comentario = "Comentario"
+                    };
+
+                    // Añadir el nuevo detalle del pedido a la base de datos
+                    _context.detalles_Pedidos.Add(nuevoDetallePedido);
+                }
+
+                // Guardar los cambios en la base de datos después de agregar todos los detalles del pedido
+                _context.SaveChanges();
+            }
+            return RedirectToAction("Combos");
+        }
+
     }
 }
