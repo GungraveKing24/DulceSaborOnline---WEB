@@ -16,13 +16,21 @@
         @foreach (var pedido in (IEnumerable<dynamic>)ViewData["PedidosPendientes"])
         {
             <tr>
-                <td><img src="@pedido.Imagen" alt="Imagen del producto" /></td>
-                <td>@pedido.Nombre</td>
-                <td>@pedido.Descripcion</td>
-                <td>@pedido.Precio</td>
-                <td>@pedido.FechaHora</td>
+                <div class="container">
+                    <td><img src="@pedido.Imagen" alt="Imagen del producto" /></td>
+                    <td>@pedido.Nombre</td>
+                    <td>@pedido.Descripcion</td>
+                    <td>@pedido.Precio</td>
+                    <td>@pedido.FechaHora</td>
 
-                <br />
+                    <td>
+                        <form method="post" action="@Url.Action("EliminarPedido", "Pagos")">
+                        <input type="hidden" name="idDPedido" value="@pedido.idpedido" />
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                    <br/>
+                </div>
             </tr>
         }
             

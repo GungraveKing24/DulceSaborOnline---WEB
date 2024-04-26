@@ -30,6 +30,11 @@ namespace DulceSaborOnline___WEB.Controllers
             return View();
         }
 
+        public IActionResult Error()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult AgregarElemento(int idItemMenu)
         {

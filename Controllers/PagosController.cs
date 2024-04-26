@@ -21,6 +21,7 @@ namespace DulceSaborOnline___WEB.Controllers
                                      where p.id_usuario == idUsuario && p.Estado == "Pendiente"
                                      select new
                                      {
+                                         idpedido = dp.id_detalles_pedidos,
                                          Imagen = mi.imagen,
                                          Nombre = mi.nombre,
                                          Descripcion = mi.descripcion,
@@ -121,6 +122,24 @@ namespace DulceSaborOnline___WEB.Controllers
             {
                 // Manejar el caso en que el pedido no se encuentre
                 // Esto podría ser lanzar una excepción, enviar un mensaje de error, etc.
+            }
+        }
+
+        //metoo eliminar a detalle pedido
+        [HttpPost]
+        public ActionResult EliminarPedido(int idDPedido)
+        {
+            var detallePedido = _context.detalles_Pedidos.Find(idDPedido);
+            if (detallePedido != null)
+            {
+                // Eliminar el detalle del pedido
+                _context.detalles_Pedidos.Remove(detallePedido);
+                _context.SaveChanges(); // Guardar los cambios en la base de datos
+                return RedirectToAction("Index", "Pagos"); // Redireccionar a alguna vista apropiada
+            }
+            else
+            {
+                return RedirectToAction("Home", "Error"); // Manejar el caso donde el detalle del pedido no se encontró
             }
         }
     }
