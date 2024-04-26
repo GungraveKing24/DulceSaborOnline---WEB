@@ -1,0 +1,39 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="container pt-5">
+    <div class="container">
+        <div class="container order-history-container">
+            <h2 class=" text-center">Historial de Pedidos</h2>
+            <!-- Ejemplo de un pedido entregado -->
+            <div class="card order-card mt-5">
+                <div class="row g-0">
+                    @{
+                        // Agrupamos los datos por la ID del pedido
+                        var historialAgrupado = ((List<dynamic>)ViewData["HistorialPedidos"]).GroupBy(p => p.IdPedido);
+                    }
+                    @if (historialAgrupado == null)
+                    {
+                        @foreach (var grupo in historialAgrupado)
+                        {
+                            <div class="historial-item">
+                                <h4>Pedido # @grupo.Key</h4>
+                                <p>Fecha: FechaHora</p>
+                                <p>Nombre(s) de los ítem(s):</p>
+                                <ul>
+                                </ul>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>No hay historial</p>
+                    }
+                </div>
+            </div>
+        </div>
+     </div>
+</div>

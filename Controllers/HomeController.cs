@@ -14,6 +14,16 @@ namespace DulceSaborOnline___WEB.Controllers
             _context = context;
         }
 
+        public IActionResult combos()
+        {
+            return View("combos");
+        }
+
+        public IActionResult Historial()
+        {
+            return View("Historial");
+        }
+
         public IActionResult Index()
         {
             var itemsMenu = _context.items_menu.ToList();
@@ -95,5 +105,26 @@ namespace DulceSaborOnline___WEB.Controllers
             var idUsuario = Convert.ToInt32(usuarioCookie?.Split('|')[0]);
             return idUsuario;
         }
+
+        //para el historial ----------------------------------------------
+        public IActionResult HistorialPedidos()
+        {
+            int idUsuario = ObtenerIdUsuarioDesdeCookie();
+
+            var historialPedidos = (from p in _context.pedidos
+                                    join dp in _context.detalles_Pedidos on p.Id_Pedido equals dp.id_pedido
+                                    join mi in _context.items_menu on dp.id_comida equals mi.id_item_menu
+                                    where p.id_usuario == ObtenerIdUsuarioDesdeCookie() && p.Estado == "Enviado"
+                                    select new
+                                    {
+                                        IdPedido = p.Id_Pedido,
+                                        FechaHora = p.fecha_hora,
+                                        NombreItemMenu = mi.nombre
+                                    }).ToList();
+
+            ViewData["HistorialPedidos"] = historialPedidos;
+            return View(historialPedidos);
+        }
+
     }
 }
